@@ -1,5 +1,3 @@
-#lang mit
-
 (define (+ a b)
   (if (= a 0) 
       b 
