@@ -1,0 +1,32 @@
+#+OPTIONS: tex:t
+* Proving Fib(n) = (x^n - y^n)/√5
+  - Because we have the definition of Fib(n), we can set the above equal to that definition and reduce to confirm that they are equal.
+    - Fib(n) = Fib(n - 1) + Fib(n - 2)
+    - (x^n - y^n)/√5 = ((x^(n-1) - y^(n-1))/√5) + ((x^(n-2) - y^(n-2))/√5)
+      - can remove the √5 denominator
+    - x^n - y^n = x^(n-1) - y^(n-1) + x^(n-2) - y^(n-2)
+      - note: x^(n-1) = x^n/x
+    - x^n - y^n = x^n/x - y^n/y + x^n/x^2 - y^n/y^2
+    - x^n - y^n = x^n/x + x^n/x^2 - y^n/y - y^n/y^2
+    - x^n - y^n = x^n(1/x + 1/x^2) - y^n(1/y - 1/y^2)
+      - let's focus on the first parentheses:
+	- 1/x + 1/x^2
+	- 1/((1 + √5)/2) + 1/((1 + √5)/2)^2
+	- 2/(1 + √5) + 2^2/(1 + √5)^2
+	- 2/(1 + √5) + 4/(6 + 2√5)
+	  - multiply the first number by (1 + √5)/(1 + √5)
+	- (2 + 2√5)/(6 + 2√5)+ 4/(6 + 2√5)
+	- (6 + 2√5)/(6 + 2√5)
+	- 1
+	- the second parentheses end up 1 as well, thus:
+    - x^2 - y^n = x^2(1) - y^n(1)
+
+* Proving that Fib(n) is the closest integer to x^n/√5
+  - I think that to prove Fib(n) is the closest integer, we just need to show that the difference between Fib(n) and x^n/√5 is less than .5.
+  - Fib(n) - x^n/√5 < 1/2
+    - sub in our equation from above
+  - (x^n - y^n)/√5 - x^n/√5 < 1/2
+  - -y^n/√5 < 1/2
+  - -(1-√5)/(2√5) < 1/2
+  - (-1+√5)/(2√5) < 1/2
+    - can keep simplifying or just solve, but it's true
