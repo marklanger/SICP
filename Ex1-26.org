@@ -1,0 +1,2 @@
+* Why is (square) more efficient than (*)?
+  - When you use (*), you call two different functions, which means expmod is called twice every loop (On^2).
