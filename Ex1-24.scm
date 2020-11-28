@@ -32,35 +32,45 @@
         (else false)))
 
 (define (timed-prime-test n)
+  (start-prime-test n (runtime)))
+
+(define (start-prime-test n start-time)
+  (if (fast-prime? n 5)
+      (report-prime n (- (runtime) 
+			 start-time))))
+
+(define (report-prime n elapsed-time)
   (newline)
   (display n)
-  (start-prime-test n (runtime))
-  (newline))
-
-;; Note, leaving this to test for prime, even though should not be necessary, to keep flexibility for future tests.
-;; Also, I realized, that I was already anticipating some of these issues and was trying to resolve them in search-for-primes. Ah well.
-(define (start-prime-test n start-time)
-  (if (fast-prime? n 8)
-      (report-prime (- (runtime) 
-                       start-time))))
-
-(define (report-prime elapsed-time)
   (display " *** ")
   (display elapsed-time))
 
-(define (search-for-primes low high)
-  (define (search-iter n primecount primes)
-    (cond ((or (= 3 primecount)
-               (= n high)) (map timed-prime-test primes))
-	  ((fast-prime? n 8) (search-iter (+ 2 n) (+ 1 primecount) (cons n primes)))
-	  (else (search-iter (+ 2 n) primecount primes))))
-   (if (even? low)
-	 (search-iter (+ low 1) 0 '())
-	 (search-iter low 0 '())))
+(define (search-for-primes lower-bound upper-bound)
+  (define (search-iter n)
+    (timed-prime-test n)
+    (if (>= n upper-bound)
+	(begin (newline)
+	       (display "Done")
+	       (newline))
+	(search-iter (+ 2 n))))
+  (search-iter (if (even? lower-bound) (+ 1 lower-bound) lower-bound)))
 
 (search-for-primes 2 10)
-(search-for-primes 1000 2000)
-(search-for-primes 1000000 2000000)
-(search-for-primes 1000000000 2000000000)
+(search-for-primes 1000 1100)
+(search-for-primes 1000000 1000100)
+(search-for-primes 1000000000 1000000100)
 
-;; Confirm with team
+;; | TEST                                    |   22 |   23 | 24 |
+;; |-----------------------------------------+------+------+----|
+;; | (s-f-p 2 10) - prime 1                  |    4 |    5 | 12 |
+;; | (s-f-p 2 10) - prime 2                  |    2 |    2 |  7 |
+;; | (s-f-p 2 10) - prime 3                  |    1 |    1 |  7 |
+;; | (s-f-p 1000 1100) - prime 1             |    8 |    4 | 31 |
+;; | (s-f-p 1000 1100) - prime 2             |   17 |    3 | 33 |
+;; | (s-f-p 1000 1100) - prime 3             |    3 |    3 | 33 |
+;; | (s-f-p 1000000 1000100) - prime 1       |  124 |  142 | 31 |
+;; | (s-f-p 1000000 1000100) - prime 2       |  184 |  142 | 31 |
+;; | (s-f-p 1000000 1000100) - prime 3       |  121 |  141 | 31 |
+;; | (s-f-p 1000000000 1000000100) - prime 1 | 3352 | 1619 | 62 |
+;; | (s-f-p 1000000000 1000000100) - prime 2 | 2397 | 1637 | 62 |
+;; | (s-f-p 1000000000 1000000100) - prime 3 | 1349 | 1735 | 60 |
