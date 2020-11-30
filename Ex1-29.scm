@@ -1,8 +1,14 @@
 #lang racket
 
-(requite sicp)
+(require sicp)
 
 ;; Exercise 1.29
+
+(define (cube x)
+  (* x x x))
+
+(define (even? x)
+  (= (remainder x 2) 0))
 
 (define (sum term a next b)
   (if (> a b)
@@ -11,18 +17,16 @@
          (sum term (next a) next b))))
 
 (define (simpsons-integral f a b n)
-  (define (y f a n h)
-    (f (+ a (* n h))))
-  (define (h a b n)
-    (/ (- b a) n))
-  (define (int-iter y count))
-  (* (/ (h a b n) 3)
-     (+ (y f a n h)
-	))
-  )
-
-(define (simpsons-integral f a b n)
-  (if (> a b)
-      0
-      (+ (⟨term⟩ a) 
-         (⟨name⟩ (⟨next⟩ a) b))))
+  ;; assumes that n is even
+  ;; h definition provided
+  (define h (/ (- b a) n))
+  ;; calculates y
+  (define (find-y k) (f (+ a (* k h))))
+  ;; provides a function that will calculate the current term based on k
+  (define simpsons-term
+    (lambda (k)
+      (cond ((or (= k 0) (= k n)) (find-y k))
+	    ((even? k) (* (find-y k) 2))
+	    (else (* (find-y k) 4)))))
+  (* (/ h 3)
+     (sum simpsons-term 0 inc n)))
