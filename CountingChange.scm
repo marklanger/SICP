@@ -27,6 +27,8 @@
         ((= kinds-of-coins 4) 25)
         ((= kinds-of-coins 5) 50)))
 
+
+
 (count-change 1) ;; 1
 (count-change 5) ;; 2
 (count-change 10) ;; 4
@@ -77,3 +79,5 @@
   (cc-iter 0 0 0 0 0))
 
 (count-change-iterative 1000) ;; 801451
+(count-change-iterative 20) ;; 9
+(count-change-iterative 25) ;; 13
