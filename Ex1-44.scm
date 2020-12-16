@@ -12,7 +12,7 @@
 (define (repeated f x)
   (if (= x 0)
       ;; at the end of the process add the function to receive x
-      (lambda (a) a)
+      f
       ;; create f([next function])
       (compose f (repeated f (- x 1)))))
 
