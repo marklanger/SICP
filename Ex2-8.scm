@@ -1,7 +1,17 @@
 #lang racket
 (require sicp)
 
-;; Exercise 2.7
+;; Exercise 2.8
+
+(define (make-interval a b) (cons a b))
+
+(define (upper-bound r)
+  (max (car r)
+       (cdr r)))
+
+(define (lower-bound r)
+  (min (car r)
+       (cdr r)))
 
 (define (add-interval x y)
   (make-interval (+ (lower-bound x) 
@@ -27,12 +37,8 @@
                  (/ 1.0 (upper-bound y)) 
                  (/ 1.0 (lower-bound y)))))
 
-(define (make-interval a b) (cons a b))
 
-(define (upper-bound r)
-  (max (car r)
-       (cdr r)))
-
-(define (lower-bound r)
-  (min (car r)
-       (cdr r)))
+(define (sub-interval x y)
+  (add-interval x
+		(make-interval (- (lower-bound y))
+			       (- (upper-bound y)))))
