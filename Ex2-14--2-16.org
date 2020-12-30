@@ -1,0 +1,12 @@
+* Interval Arithmetic
+** Problems
+   - There are a lot of issues that arise when trying to do math with intervals.
+   - The biggest immediate problem that I see is that we lose algebraic identity, which leads to the break down of a lot of algebraic rules.
+     - For example, there are a lot of numbers that fit into one interval (if the variance is 1% and the center is 100, it could be anything from 99% to 101%).
+     - That means we get to the point where a(b+c) != ab + ac. Standard algebra falls apart.
+   - Helpful resources:
+     1. http://community.schemewiki.org/?sicp-ex-2.14-2.15-2.16
+     2. http://wiki.drewhess.com/wiki/SICP_exercise_2.16
+** Interval Arithmetic System
+   - I don't know how you can create a system that keeps the usefulness (including the vagueness) of intervals while still ensuring that basic arithmetic systems still work.
+   - It seems that, to get the benefit of arithmetic, you need to be able to ensure that "A = A".
