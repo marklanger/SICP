@@ -1,5 +1,6 @@
 #lang racket
 (require sicp)
+(require racket/trace)
 
 ;; Exercise 2.19
 (define us-coins 
@@ -37,9 +38,9 @@
                  coin-values))
              coin-values)))))
 
-(cc 100 us-coins)
-(cc 100 uk-coins)
-(cc 100 uk-coins-reversed)
+;; (cc 100 us-coins)
+;; (cc 100 uk-coins)
+;; (cc 100 uk-coins-reversed)
 
 ;; Still works just fine, as the logic here is not defined on the
 ;; order of the list -- It does take a lot long to calculate based
