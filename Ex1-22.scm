@@ -1,6 +1,7 @@
 #lang racket
 
 (require sicp)
+(require racket/trace)
 
 ;; Exercise 1.23
 
@@ -19,7 +20,7 @@
 (define (even? x)
   (= 0 (remainder x 2)))
 
-(define (square x)
+(define (square x
   (* x x))
 
 (define (smallest-divisor n)
@@ -62,6 +63,9 @@
 	       (newline))
 	(search-iter (+ 2 n))))
   (search-iter (if (even? lower-bound) (+ 1 lower-bound) lower-bound)))
+
+(trace search-for-primes)
+(search-for-primes 2 10)
 
 ;; | TEST                                    |   22 |
 ;; |-----------------------------------------+------|
